@@ -19,7 +19,13 @@
       new daum.Postcode({
         oncomplete: function (data) {
           // 주소가 선택되면 이 데이터를 React Native 앱으로 전달
-          window.ReactNativeWebView.postMessage(JSON.stringify(data));
+          // 주소 선택 완료 시 postMessage로 데이터를 앱으로 보낼 때
+          window.ReactNativeWebView.postMessage(
+            JSON.stringify({
+              address: data.roadAddress,
+              zonecode: data.zonecode, // ✅ 우편번호 같이 전달
+            })
+          );
         },
       }).embed(document.getElementById("wrap"));
     </script>
