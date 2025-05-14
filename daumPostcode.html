@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>주소 검색</title>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap"></div>
+    <script>
+      new daum.Postcode({
+        oncomplete: function (data) {
+          // 주소가 선택되면 이 데이터를 React Native 앱으로 전달
+          window.ReactNativeWebView.postMessage(JSON.stringify(data));
+        },
+      }).embed(document.getElementById("wrap"));
+    </script>
+  </body>
+</html>
