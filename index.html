@@ -12,10 +12,9 @@
         padding: 0;
       }
 
-      /* ✅ 여기 추가 */
       #wrap {
         width: 100%;
-        height: 500px; /* 또는 원하는 높이 값 */
+        height: 100vh; /* 화면 전체 높이 사용 */
       }
     </style>
   </head>
@@ -31,7 +30,20 @@
             })
           );
         },
+        width: "100%",
+        height: "100%",
       }).embed(document.getElementById("wrap"));
+
+      // ✅ iframe 로드 후 높이 강제로 설정
+      window.onload = () => {
+        setTimeout(() => {
+          const iframe = document.querySelector("#wrap iframe");
+          if (iframe) {
+            iframe.style.height = "100vh"; // 전체 화면 높이 적용
+            iframe.style.width = "100%";
+          }
+        }, 100); // 살짝 딜레이 줘야 iframe이 생성된 뒤에 적용됨
+      };
     </script>
   </body>
 </html>
